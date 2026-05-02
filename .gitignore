@@ -43,6 +43,10 @@ desktop.ini
 backend/uploads/
 backend/src/uploads/
 
+# ─── Sensitive / Credential Files ────────────────────────
+credentials.txt
+details.txt
+
 # ─── Misc ─────────────────────────────────────────────────
 *.pem
 *.key
