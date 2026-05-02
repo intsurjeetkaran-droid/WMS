@@ -240,7 +240,7 @@ export default function LandingPage() {
     nav: {
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      padding: '0 clamp(16px, 5vw, 80px)',
+      padding: '0 clamp(20px, 6vw, 100px)',
       height: 64,
       background: scrolled ? 'rgba(10,10,10,0.85)' : 'transparent',
       backdropFilter: scrolled ? 'blur(16px)' : 'none',
@@ -287,21 +287,22 @@ export default function LandingPage() {
     hero: {
       minHeight: '100vh',
       display: 'flex', alignItems: 'center',
-      padding: 'clamp(80px, 10vw, 120px) clamp(16px, 5vw, 80px) 60px',
+      padding: '100px clamp(20px, 6vw, 100px) 80px',
       position: 'relative', overflow: 'hidden',
     },
     heroInner: {
-      display: 'flex', alignItems: 'center',
-      gap: 'clamp(32px, 5vw, 80px)',
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr',
+      alignItems: 'center',
+      gap: 'clamp(40px, 5vw, 80px)',
       width: '100%', maxWidth: 1280, margin: '0 auto',
-      flexWrap: 'wrap',
     },
     heroLeft: {
-      flex: '0 0 55%', minWidth: 280,
+      minWidth: 0,
     },
     heroRight: {
-      flex: '0 0 40%', minWidth: 280,
-      display: 'flex', justifyContent: 'center',
+      minWidth: 0,
+      display: 'flex', justifyContent: 'center', alignItems: 'center',
     },
     pill: {
       display: 'inline-flex', alignItems: 'center', gap: 8,
@@ -316,9 +317,9 @@ export default function LandingPage() {
       background: '#22c55e', boxShadow: '0 0 6px #22c55e',
     },
     heroHeading: {
-      fontSize: 'clamp(40px, 6vw, 72px)',
-      fontWeight: 800, lineHeight: 1.05,
-      letterSpacing: '-0.04em', margin: '0 0 24px',
+      fontSize: 'clamp(34px, 4vw, 58px)',
+      fontWeight: 800, lineHeight: 1.08,
+      letterSpacing: '-0.04em', margin: '0 0 20px',
       color: '#f1f5f9',
     },
     heroGradient: {
@@ -328,16 +329,16 @@ export default function LandingPage() {
       backgroundClip: 'text',
     },
     heroSub: {
-      fontSize: 'clamp(15px, 1.8vw, 18px)',
-      color: '#94a3b8', lineHeight: 1.7,
-      maxWidth: 480, margin: '0 0 36px',
+      fontSize: 'clamp(14px, 1.4vw, 17px)',
+      color: '#94a3b8', lineHeight: 1.75,
+      maxWidth: 460, margin: '0 0 32px',
     },
     heroCtas: {
-      display: 'flex', alignItems: 'center', gap: 16,
-      flexWrap: 'wrap', marginBottom: 40,
+      display: 'flex', alignItems: 'center', gap: 14,
+      flexWrap: 'wrap', marginBottom: 36,
     },
     btnLarge: {
-      padding: '14px 28px', borderRadius: 10,
+      padding: '13px 26px', borderRadius: 10,
       background: '#f97316', color: '#0a0a0a',
       border: 'none', fontSize: 15, fontWeight: 700,
       cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8,
@@ -356,15 +357,17 @@ export default function LandingPage() {
     },
     metricCard: {
       background: 'rgba(255,255,255,0.04)',
-      border: '1px solid rgba(255,255,255,0.08)',
-      borderRadius: 10, padding: '10px 16px',
-      display: 'flex', flexDirection: 'column', gap: 2,
+      border: '1px solid rgba(255,255,255,0.1)',
+      borderRadius: 12, padding: '14px 20px',
+      display: 'flex', flexDirection: 'column', gap: 4,
+      flex: '1 1 auto',
     },
     metricVal: {
-      fontSize: 16, fontWeight: 700, color: '#f97316',
+      fontSize: 20, fontWeight: 800, color: '#f97316',
+      letterSpacing: '-0.02em',
     },
     metricLabel: {
-      fontSize: 11, color: '#64748b', fontWeight: 500,
+      fontSize: 12, color: '#64748b', fontWeight: 500,
     },
   };
 
@@ -434,7 +437,7 @@ export default function LandingPage() {
           .nav-links-desktop { display: none !important; }
           .nav-actions-desktop { display: none !important; }
           .hero-right { display: none !important; }
-          .hero-left { flex: 0 0 100% !important; }
+          .hero-grid { grid-template-columns: 1fr !important; }
           .bento-grid { grid-template-columns: 1fr !important; }
           .bento-span2 { grid-column: span 1 !important; }
           .workflow-inner { flex-direction: column !important; align-items: center !important; }
@@ -447,11 +450,10 @@ export default function LandingPage() {
           .stats-grid { grid-template-columns: 1fr !important; }
           .metric-row { flex-direction: column !important; }
         }
-        @media (min-width: 769px) and (max-width: 1024px) {
+        @media (min-width: 769px) and (max-width: 1100px) {
+          .hero-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
           .bento-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .bento-span2 { grid-column: span 2 !important; }
-          .hero-right { flex: 0 0 45% !important; }
-          .hero-left  { flex: 0 0 50% !important; }
         }
       `}</style>
 
@@ -540,7 +542,7 @@ export default function LandingPage() {
           pointerEvents: 'none', zIndex: 0,
         }} />
 
-        <div style={{ ...s.heroInner, position: 'relative', zIndex: 1 }}>
+        <div style={{ ...s.heroInner, position: 'relative', zIndex: 1 }} className="hero-grid">
           {/* LEFT */}
           <motion.div style={s.heroLeft} className="hero-left" {...stagger(0)}>
             <div style={s.pill}>
@@ -628,13 +630,14 @@ export default function LandingPage() {
           STATS ROW
       ══════════════════════════════════════════ */}
       <section style={{
-        padding: 'clamp(60px, 8vw, 100px) clamp(16px, 5vw, 80px)',
-        maxWidth: 1280, margin: '0 auto', width: '100%',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 6vw, 100px)',
+        width: '100%',
       }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <motion.div {...fadeUp} style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 32,
+          gap: 40,
         }} className="stats-grid">
           {[
             { num: '10,000', suffix: '+', label: 'Products Tracked' },
@@ -644,28 +647,29 @@ export default function LandingPage() {
           ].map((stat, i) => (
             <motion.div key={stat.label} {...stagger(i * 0.1)} style={{
               borderLeft: '3px solid #f97316',
-              paddingLeft: 20,
+              paddingLeft: 24,
             }}>
               <div style={{
-                fontSize: 'clamp(36px, 5vw, 52px)',
+                fontSize: 'clamp(32px, 4vw, 48px)',
                 fontWeight: 800, color: '#f97316',
                 letterSpacing: '-0.04em', lineHeight: 1,
               }}>
                 <AnimatedCounter target={stat.num.replace(/,/g, '')} suffix={stat.suffix} />
               </div>
-              <div style={{ fontSize: 14, color: '#64748b', marginTop: 6, fontWeight: 500 }}>
+              <div style={{ fontSize: 14, color: '#64748b', marginTop: 8, fontWeight: 500 }}>
                 {stat.label}
               </div>
             </motion.div>
           ))}
         </motion.div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════
           FEATURES BENTO GRID
       ══════════════════════════════════════════ */}
       <section id="features" style={{
-        padding: 'clamp(60px, 8vw, 100px) clamp(16px, 5vw, 80px)',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 6vw, 100px)',
         background: '#080808',
       }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -867,8 +871,8 @@ export default function LandingPage() {
           WORKFLOW — Horizontal Timeline
       ══════════════════════════════════════════ */}
       <section id="workflow" style={{
-        padding: 'clamp(60px, 8vw, 100px) clamp(16px, 5vw, 80px)',
-        maxWidth: 1280, margin: '0 auto',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 6vw, 100px)',
+        maxWidth: 1280, margin: '0 auto', width: '100%',
       }}>
         <motion.div {...fadeUp} style={{ marginBottom: 56, textAlign: 'center' }}>
           <div style={{
@@ -958,7 +962,7 @@ export default function LandingPage() {
           TESTIMONIAL / QUOTE
       ══════════════════════════════════════════ */}
       <section style={{
-        padding: 'clamp(60px, 8vw, 100px) clamp(16px, 5vw, 80px)',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 6vw, 100px)',
         background: '#080808',
       }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
@@ -1011,7 +1015,7 @@ export default function LandingPage() {
           CTA — Diagonal clip-path
       ══════════════════════════════════════════ */}
       <section className="cta-clip" style={{
-        padding: 'clamp(100px, 12vw, 140px) clamp(16px, 5vw, 80px)',
+        padding: 'clamp(100px, 12vw, 140px) clamp(20px, 6vw, 100px)',
         background: 'linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(251,191,36,0.06) 100%)',
         clipPath: 'polygon(0 8%, 100% 0%, 100% 92%, 0% 100%)',
         textAlign: 'center',
@@ -1060,8 +1064,8 @@ export default function LandingPage() {
           FOOTER
       ══════════════════════════════════════════ */}
       <footer style={{
-        padding: 'clamp(24px, 4vw, 40px) clamp(16px, 5vw, 80px)',
-        borderTop: '1px solid #141414',
+        padding: 'clamp(24px, 4vw, 40px) clamp(20px, 6vw, 100px)',
+        borderTop: '1px solid #1a1a1a',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         flexWrap: 'wrap', gap: 16,
       }}>
