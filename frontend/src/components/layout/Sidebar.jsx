@@ -78,7 +78,7 @@ const Sidebar = ({ collapsed, onToggle }) => {
               fontSize: '16px', fontWeight: '800', color: 'white',
               flexShrink: 0,
             }}>W</div>
-            <span style={{ color: 'white', fontWeight: '700', fontSize: '1rem', letterSpacing: '-0.02em' }}>
+            <span style={{ color: 'var(--sidebar-text)', fontWeight: '700', fontSize: '1rem', letterSpacing: '-0.02em' }}>
               {APP_NAME}
             </span>
           </div>
@@ -189,7 +189,7 @@ const Sidebar = ({ collapsed, onToggle }) => {
           <div style={{
             display: 'flex', alignItems: 'center', gap: '10px',
             padding: '10px 12px', borderRadius: '8px',
-            background: 'rgba(255,255,255,0.04)',
+            background: 'var(--sidebar-hover)',
             marginBottom: '8px',
           }}>
             <div style={{
@@ -201,7 +201,7 @@ const Sidebar = ({ collapsed, onToggle }) => {
               {user.name?.charAt(0).toUpperCase()}
             </div>
             <div style={{ overflow: 'hidden', flex: 1 }}>
-              <div style={{ color: 'white', fontWeight: '600', fontSize: '0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ color: 'var(--sidebar-text)', fontWeight: '600', fontSize: '0.8rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {user.name}
               </div>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>

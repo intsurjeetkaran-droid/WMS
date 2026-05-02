@@ -100,3 +100,9 @@ The frontend builds to a static `dist/` folder and can be deployed to **Vercel**
 The backend is a standard Node.js/Express app deployable to **Render**, **Railway**, **Heroku**, or any Node host.
 
 Set the production environment variables on your hosting platform before deploying.
+
+## Developer
+
+**Surjeet Karan**  
+Full Stack Developer  
+GitHub: [@intsurjeetkaran-droid](https://github.com/intsurjeetkaran-droid)
