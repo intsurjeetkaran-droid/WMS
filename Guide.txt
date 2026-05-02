@@ -1,0 +1,413 @@
+🧭 WMS MASTER TRACKER (MARK AS YOU BUILD)
+[✅] Authentication System (Login/Register/JWT)
+[✅] Role-Based Access Control (RBAC)
+[✅] Dashboard (Role-based)
+[✅] Product Management
+[✅] Inventory Management
+[✅] Warehouse Structure (Zone/Rack/Shelf/Bin)
+[✅] Inbound (Receiving / GRN)
+[✅] Outbound (Picking/Packing/Shipping)
+[✅] Order Management
+[✅] Supplier Management
+[✅] Stock Movement Tracking
+[ ] Barcode / QR System
+[✅] Alerts & Notifications
+[✅] Reports & Analytics
+[✅] Audit Logs (Critical)
+[✅] Settings & Configuration
+[✅] Dark/Light Theme Toggle
+[✅] Landing Page (Unique UI)
+[✅] Sidebar Navigation System
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 BUILD LOG
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ MODULE 1: Auth + RBAC (COMPLETE)
+  - backend/src/models/User.js          → User model with bcrypt hashing
+  - backend/src/controllers/authController.js → Register, Login, Profile, Role mgmt
+  - backend/src/middleware/auth.js       → JWT protect + authorize middleware
+  - backend/src/routes/authRoutes.js    → All auth endpoints
+  - frontend/src/context/AuthContext.jsx → Global auth state
+  - frontend/src/pages/LoginPage.jsx    → Login form
+  - frontend/src/pages/RegisterPage.jsx → Register form
+
+✅ MODULE 2: Product Management (COMPLETE)
+  - backend/src/models/Product.js       → Product schema (SKU, barcode, category)
+  - backend/src/controllers/productController.js → Full CRUD + scan
+  - backend/src/routes/productRoutes.js → Product endpoints
+  - frontend/src/pages/ProductsPage.jsx → Products table + modal form
+
+✅ MODULE 3: Inventory Management (COMPLETE)
+  - backend/src/models/Inventory.js     → Real-time stock per bin
+  - backend/src/controllers/inventoryController.js → Adjust, transfer, summary
+  - backend/src/routes/inventoryRoutes.js → Inventory endpoints
+  - frontend/src/pages/InventoryPage.jsx → Inventory table + adjust modal
+
+✅ MODULE 4: Warehouse Structure (COMPLETE)
+  - backend/src/models/Warehouse.js     → Warehouse → Zone → Rack → Shelf → Bin
+  - backend/src/controllers/warehouseController.js → CRUD + zone/rack management
+  - backend/src/routes/warehouseRoutes.js → Warehouse endpoints
+  - frontend/src/pages/WarehousePage.jsx → Expandable warehouse cards
+
+✅ MODULE 5: Inbound / GRN (COMPLETE)
+  - backend/src/models/Inbound.js       → GRN model with item tracking
+  - backend/src/controllers/inboundController.js → Create, receive, verify
+  - backend/src/routes/inboundRoutes.js → Inbound endpoints
+  - frontend/src/pages/InboundPage.jsx  → GRN table + create modal
+
+✅ MODULE 6: Outbound (COMPLETE)
+  - frontend/src/pages/OutboundPage.jsx → Pick/pack/ship workflow
+
+✅ MODULE 7: Order Management (COMPLETE)
+  - backend/src/models/Order.js         → Order with status history
+  - backend/src/controllers/orderController.js → CRUD + status updates
+  - backend/src/routes/orderRoutes.js   → Order endpoints
+  - frontend/src/pages/OrdersPage.jsx   → Orders table + status modal
+
+✅ MODULE 8: Supplier Management (COMPLETE)
+  - backend/src/models/Supplier.js      → Supplier schema
+  - backend/src/controllers/supplierController.js → Full CRUD
+  - backend/src/routes/supplierRoutes.js → Supplier endpoints
+  - frontend/src/pages/SuppliersPage.jsx → Suppliers table + modal
+
+✅ MODULE 9: Stock Movement Tracking (COMPLETE)
+  - backend/src/models/StockMovement.js → Movement audit trail
+  - frontend/src/pages/StockMovementPage.jsx → Movement history table
+
+✅ MODULE 10: Alerts & Notifications (COMPLETE)
+  - backend/src/models/Notification.js  → Notification model
+  - backend/src/controllers/notificationController.js → Get, mark read
+  - backend/src/routes/notificationRoutes.js → Notification endpoints
+  - frontend/src/pages/AlertsPage.jsx   → Notification feed
+
+✅ MODULE 11: Reports & Analytics (COMPLETE)
+  - backend/src/controllers/reportController.js → Dashboard, inventory, orders, movements
+  - backend/src/routes/reportRoutes.js  → Report endpoints
+  - frontend/src/pages/ReportsPage.jsx  → Charts with Recharts
+
+✅ MODULE 12: Audit Logs (COMPLETE)
+  - backend/src/models/AuditLog.js      → Full audit trail model
+  - backend/src/utils/auditLogger.js    → Central logging utility
+  - backend/src/controllers/auditLogController.js → Read logs + stats
+  - backend/src/routes/auditLogRoutes.js → Log endpoints
+  - frontend/src/pages/AuditLogsPage.jsx → Logs table with filters
+
+✅ MODULE 13: Settings (COMPLETE)
+  - frontend/src/pages/SettingsPage.jsx → Profile, password, theme, user mgmt
+
+✅ MODULE 14: Landing Page (COMPLETE)
+  - frontend/src/pages/LandingPage.jsx  → Hero, stats, features, workflow, CTA
+
+✅ MODULE 15: Sidebar + Layout (COMPLETE)
+  - frontend/src/components/layout/Sidebar.jsx → Dark sidebar with role-based nav
+  - frontend/src/components/layout/Topbar.jsx  → Search, notifications, profile
+  - frontend/src/components/layout/AppLayout.jsx → Main layout wrapper
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 HOW TO RUN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BACKEND:
+  1. Make sure MongoDB is running locally (port 27017)
+  2. cd backend
+  3. npm run dev
+  → API runs at http://localhost:5000
+
+FRONTEND:
+  1. cd frontend
+  2. npm run dev
+  → App runs at http://localhost:5173
+
+FIRST LOGIN:
+  1. Go to http://localhost:5173
+  2. Click "Get Started" → Register
+  3. First user gets 'viewer' role by default
+  4. To make super_admin: update role in MongoDB directly or via API
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📁 PROJECT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+backend/
+  src/
+    config/db.js              → MongoDB connection
+    controllers/              → Business logic (10 controllers)
+    middleware/auth.js        → JWT + RBAC middleware
+    middleware/errorHandler.js → Global error handler
+    models/                   → Mongoose schemas (8 models)
+    routes/                   → Express routes (10 route files)
+    sockets/socketHandler.js  → Socket.io real-time events
+    utils/auditLogger.js      → Central audit logging
+    utils/apiResponse.js      → Standardized responses
+    app.js                    → Express app setup
+    server.js                 → Server entry point
+  .env                        → Environment variables
+
+frontend/
+  src/
+    components/
+      common/                 → StatCard, DataTable, Modal, Badge, etc.
+      layout/                 → Sidebar, Topbar, AppLayout
+    context/
+      AuthContext.jsx         → Global auth state
+      ThemeContext.jsx        → Dark/light theme
+    hooks/useSocket.js        → Socket.io hook
+    pages/                    → 15 page components
+    services/api.js           → Axios API client
+    utils/constants.js        → App constants
+    App.jsx                   → Routes + providers
+    index.css                 → Global styles + theme variables
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏳ REMAINING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ ] Barcode / QR System
+    - QR code generation for products (qrcode npm package ready)
+    - Scan UI component (mobile-friendly)
+    - Camera-based scanning integration
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🏗️ 1. SYSTEM OVERVIEW
+
+A Warehouse Management System (WMS) manages:
+
+Stock
+Orders
+Storage locations
+Movement tracking
+Staff operations
+
+👉 Your system should be:
+
+Real-time
+Role-based
+Fully logged (important for interviews)
+👥 2. ROLES & PERMISSIONS
+🔑 Super Admin
+Full access
+Manage users & roles
+View all warehouses
+System settings
+Audit logs
+🏭 Warehouse Manager
+Manage inventory
+Approve inbound/outbound
+Assign staff tasks
+View reports
+📦 Inventory Manager
+Add/edit products
+Update stock
+Manage stock transfers
+👷 Staff (Operator)
+Scan items
+Receive goods
+Pick/pack orders
+🚚 Dispatch Staff
+Handle shipments
+Update delivery status
+📊 Viewer / Auditor
+Read-only access
+Reports + logs only
+🧩 3. CORE MODULES (DETAILED)
+📦 Product Module
+Name, SKU, Category
+Barcode/QR
+Unit (kg/piece)
+Supplier link
+📊 Inventory Module
+Real-time stock
+Available vs reserved
+Batch + expiry tracking
+🏢 Warehouse Structure
+Warehouse → Zone → Rack → Shelf → Bin
+📥 Inbound Module
+
+Flow:
+
+Supplier → Receive → Verify → Assign Bin → Stock Update
+
+Features:
+
+GRN creation
+Bulk upload
+Scan-based entry
+📤 Outbound Module
+
+Flow:
+
+Order → Pick → Pack → Ship → Deliver
+
+Features:
+
+Pick list
+Packing UI
+Shipment tracking
+📑 Order Module
+Order creation
+Status tracking:
+Pending
+Picked
+Packed
+Shipped
+Delivered
+🚛 Supplier Module
+Supplier details
+Purchase history
+🔄 Stock Movement
+Transfer logs
+Bin-to-bin movement
+Full history
+🔍 Barcode / QR
+Scan to update stock
+Reduce manual errors
+🔔 Alerts
+Low stock
+Expiry warning
+Delayed orders
+📈 Reports
+Inventory reports
+Order analytics
+Movement reports
+🧾 Audit Logs (VERY IMPORTANT)
+
+Track:
+
+User | Action | Module | Timestamp | Before | After
+🎨 4. FINAL COLOR SYSTEM (YOUR SELECTED THEME)
+🌞 LIGHT THEME (Selected)
+
+🟧 Primary (Orange)
+🟨 Secondary (Light Yellow)
+⬜ Background
+⚪ Cards
+⬛ Text
+
+🌙 DARK THEME (Selected Premium Glow)
+
+⚫ Background
+◼️ Cards
+🟧 Primary Glow
+🟨 Secondary Soft
+⚪ Text
+
+🎯 COLOR USAGE
+Buttons → 🟧
+Highlights → 🟧
+Secondary actions → 🟨
+Cards → ⚪ / ◼️
+Sidebar → ⚫ (dark always for premium feel)
+🚦 STATUS COLORS
+🟢 Success
+🟨 Warning
+🔴 Error
+🔵 Info
+🌐 5. UNIQUE LANDING PAGE (VERY IMPORTANT)
+🎯 Goal:
+
+Make it look different from generic admin panels
+
+🧠 Structure:
+🔝 Hero Section
+Big heading:
+👉 "Smart Warehouse Management System"
+Subtext:
+👉 "Track. Manage. Optimize inventory in real-time"
+CTA:
+🟧 "Get Started"
+📊 Live Stats Section (Animated)
+Total Stock
+Orders Today
+Low Stock Items
+
+👉 Add count animation
+
+⚙️ Features Section
+
+Cards with icons:
+
+Inventory Tracking
+Smart Storage
+Real-time Alerts
+Barcode System
+🔄 Workflow Section
+
+Show flow:
+
+Receive → Store → Track → Ship
+📱 UI Preview Section
+Show dashboard mockup
+Add hover animations
+🚀 CTA Section
+
+🟧 "Start Managing Your Warehouse"
+
+💡 UNIQUE TOUCH
+Use gradient orange glow
+Add micro animations
+Avoid boring templates
+📂 6. INTERNAL UI (SIDEBAR LAYOUT)
+🧭 Sidebar Structure
+🏠 Dashboard
+📦 Inventory
+📦 Products
+🏢 Warehouse
+📥 Inbound
+📤 Outbound
+📑 Orders
+🚛 Suppliers
+🔄 Stock Movement
+📊 Reports
+🔔 Alerts
+🧾 Logs
+⚙️ Settings
+🎨 Sidebar Design
+Background: ⚫ dark
+Active item: 🟧 highlight
+Icons: minimal + line icons
+Hover: soft glow
+📐 Layout Structure
+Sidebar (fixed) | Topbar | Main Content
+🔝 Topbar
+Search bar
+Notifications 🔔
+Profile menu
+🧠 7. UX FEATURES (MAKE IT UNIQUE)
+Real-time updates (WebSocket)
+Drag-drop stock movement
+Scan-based UI (mobile friendly)
+Activity timeline panel
+Quick actions floating button
+🗄️ 8. DATABASE COLLECTIONS
+users
+roles
+products
+inventory
+warehouses
+orders
+suppliers
+stock_movements
+logs
+notifications
+⚡ 9. BUILD ORDER (IMPORTANT)
+
+Start in this order:
+
+1. Auth + Roles ✅
+2. Product + Inventory ✅
+3. Warehouse Structure ✅
+4. Inbound ✅
+5. Outbound ✅
+6. Orders ✅
+7. Logs ✅
+8. UI polish (in progress)
+🏁 FINAL NOTE
+
+This system becomes interview-level strong if you include:
+
+Logging system ✅
+Real-time updates ✅ (Socket.io ready)
+Clean UI with theme consistency ✅
+Use logging and comment in every file ✅

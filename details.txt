@@ -1,0 +1,116 @@
+============================================================
+  WMS Pro - Warehouse Management System
+  Non-Technical User Guide
+============================================================
+
+WHAT IS THIS?
+─────────────
+WMS Pro is a web-based Warehouse Management System that helps
+you manage inventory, track orders, handle inbound shipments,
+and monitor stock across multiple warehouses — all from a
+browser.
+
+------------------------------------------------------------
+HOW TO ACCESS THE APP
+------------------------------------------------------------
+
+Once the app is deployed, open your browser and go to the
+URL provided by your administrator.
+
+You will see a Login page. Use the credentials below.
+
+------------------------------------------------------------
+LOGIN CREDENTIALS
+------------------------------------------------------------
+
+  Role                   Email                        Password
+  ─────────────────────────────────────────────────────────
+  Super Admin            admin@wms.com                Admin@123
+  Warehouse Manager      manager@wms.com              Manager@123
+  Inventory Manager      inventory@wms.com            Inventory@123
+  Staff                  staff@wms.com                Staff@123
+  Dispatch Staff         dispatch@wms.com             Dispatch@123
+  Viewer                 viewer@wms.com               Viewer@123
+
+  TIP: Start with admin@wms.com / Admin@123 for full access.
+
+------------------------------------------------------------
+WHAT EACH ROLE CAN DO
+------------------------------------------------------------
+
+  Super Admin       → Full access to everything. Can manage
+                      users, settings, all modules.
+
+  Warehouse Manager → Manages warehouses, approves inbound
+                      shipments, oversees stock.
+
+  Inventory Manager → Views and adjusts inventory levels,
+                      manages products and suppliers.
+
+  Staff             → Receives goods, processes inbound
+                      shipments, updates stock.
+
+  Dispatch Staff    → Picks, packs, and ships orders.
+
+  Viewer            → Read-only access. Can view reports
+                      and dashboards but cannot make changes.
+
+------------------------------------------------------------
+MAIN SECTIONS OF THE APP
+------------------------------------------------------------
+
+  Dashboard         → Overview of key stats: total stock,
+                      pending orders, low stock alerts.
+
+  Inventory         → See all products and their stock
+                      levels across warehouses.
+
+  Products          → Product catalog with SKUs, prices,
+                      and supplier info.
+
+  Orders            → Outbound customer orders. Track
+                      status from pending to delivered.
+
+  Inbound           → Incoming shipments (GRNs). Receive
+                      and verify goods from suppliers.
+
+  Suppliers         → Supplier directory and contact info.
+
+  Warehouses        → Warehouse locations, zones, and
+                      bin/rack structure.
+
+  Stock Movement    → Full history of every stock change
+                      (received, shipped, transferred, etc.)
+
+  Reports           → Generate inventory and order reports.
+
+  Alerts            → Low stock and expiry notifications.
+
+  Audit Logs        → Who did what and when (admin only).
+
+------------------------------------------------------------
+COMMON TASKS
+------------------------------------------------------------
+
+  To check stock levels:
+    → Go to Inventory → search by product name or SKU.
+
+  To process a new order:
+    → Go to Orders → click "New Order" → fill in customer
+      details and select products.
+
+  To receive a shipment:
+    → Go to Inbound → find the GRN → click "Receive" →
+      enter quantities received.
+
+  To view low stock alerts:
+    → Go to Alerts or check the Dashboard notifications.
+
+------------------------------------------------------------
+NEED HELP?
+------------------------------------------------------------
+
+  Contact your system administrator or the development team
+  if you encounter any issues.
+
+============================================================
