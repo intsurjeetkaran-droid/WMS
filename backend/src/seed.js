@@ -16,7 +16,6 @@
 
 require('dotenv').config();
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 // Models
 const User = require('./models/User');
@@ -285,9 +284,7 @@ async function seed() {
     console.log('\n👥 Seeding users...');
     const createdUsers = [];
     for (const u of USERS) {
-      const salt = await bcrypt.genSalt(12);
-      const hashed = await bcrypt.hash(u.password, salt);
-      const user = await User.create({ ...u, password: hashed });
+      const user = await User.create({ ...u });
       createdUsers.push(user);
       ok(`${user.role.padEnd(20)} ${user.email.padEnd(28)} / ${u.password}`);
     }
