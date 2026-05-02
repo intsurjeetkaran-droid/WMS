@@ -4,6 +4,7 @@
   "description": "WMS Pro - Warehouse Management System Backend",
   "main": "src/server.js",
   "scripts": {
+    "build": "npm install",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "echo \"No tests configured\" && exit 0"
