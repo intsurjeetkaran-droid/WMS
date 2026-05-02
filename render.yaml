@@ -1,0 +1,38 @@
+services:
+  # ── Backend (Node.js Web Service) ─────────────────────────────
+  - type: web
+    name: wms-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: CLIENT_URL
+        value: https://wms-frontend-yu3h.onrender.com
+      # Set these in Render dashboard (sensitive):
+      # MONGO_URI
+      # JWT_SECRET
+      # JWT_EXPIRE
+
+  # ── Frontend (Static Site) ────────────────────────────────────
+  - type: web
+    name: wms-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://wms-786w.onrender.com/api
+      - key: VITE_SOCKET_URL
+        value: https://wms-786w.onrender.com
+      - key: VITE_APP_NAME
+        value: WMS Pro
