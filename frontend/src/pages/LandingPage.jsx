@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  FiPlay, FiArrowRight, FiBox, FiLayers, FiUsers,
+  FiPlay, FiArrowRight, FiBox, FiLayers,
   FiFileText, FiAlertTriangle, FiRepeat, FiBarChart2,
-  FiCheckCircle, FiZap, FiShield
+  FiCheckCircle, FiZap, FiShield, FiMenu, FiX
 } from 'react-icons/fi';
 
 /* ─── Animated Counter ─────────────────────────────────────────── */
@@ -203,6 +203,7 @@ function DashboardMockup() {
 export default function LandingPage() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -383,18 +384,74 @@ export default function LandingPage() {
           0%, 100% { opacity: 0.35; }
           50%       { opacity: 0.6; }
         }
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
         .nav-link-hover:hover { color: #f1f5f9 !important; }
         .btn-outline-hover:hover {
           background: rgba(249,115,22,0.08) !important;
           border-color: #f97316 !important;
         }
         .btn-orange-hover:hover { background: #ea6c0a !important; }
-        .btn-large-hover:hover  { background: #ea6c0a !important; transform: translateY(-1px); }
+        .btn-large-hover:hover  { background: #ea6c0a !important; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(249,115,22,0.35) !important; }
         .btn-ghost-hover:hover  { background: rgba(255,255,255,0.06) !important; }
         .feature-card:hover {
           border-color: rgba(249,115,22,0.4) !important;
           background: rgba(249,115,22,0.04) !important;
           box-shadow: inset 3px 0 0 #f97316 !important;
+          transform: translateY(-2px);
+        }
+        .workflow-step:hover .step-circle {
+          background: rgba(249,115,22,0.2) !important;
+          border-color: #f97316 !important;
+        }
+        /* Mobile nav */
+        .mobile-menu {
+          display: none;
+          position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+          background: rgba(10,10,10,0.97);
+          backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          padding: 20px clamp(16px,5vw,40px) 28px;
+          flex-direction: column; gap: 4px;
+          animation: fadeDown 0.2s ease;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu-link {
+          padding: 12px 0; font-size: 16px; font-weight: 500;
+          color: #94a3b8; cursor: pointer; border: none; background: none;
+          text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05);
+          transition: color 0.2s;
+        }
+        .mobile-menu-link:hover { color: #f1f5f9; }
+        .mobile-menu-actions { display: flex; gap: 12px; margin-top: 16px; }
+        .hamburger { display: none; }
+        .nav-links-desktop { display: flex; }
+        .nav-actions-desktop { display: flex; }
+        @media (max-width: 768px) {
+          .hamburger { display: flex !important; }
+          .nav-links-desktop { display: none !important; }
+          .nav-actions-desktop { display: none !important; }
+          .hero-right { display: none !important; }
+          .hero-left { flex: 0 0 100% !important; }
+          .bento-grid { grid-template-columns: 1fr !important; }
+          .bento-span2 { grid-column: span 1 !important; }
+          .workflow-inner { flex-direction: column !important; align-items: center !important; }
+          .workflow-connector { display: none !important; }
+          .workflow-step { max-width: 100% !important; width: 100% !important; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .cta-clip { clip-path: none !important; padding-top: 80px !important; padding-bottom: 80px !important; }
+        }
+        @media (max-width: 480px) {
+          .stats-grid { grid-template-columns: 1fr !important; }
+          .metric-row { flex-direction: column !important; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .bento-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .bento-span2 { grid-column: span 2 !important; }
+          .hero-right { flex: 0 0 45% !important; }
+          .hero-left  { flex: 0 0 50% !important; }
         }
       `}</style>
 
@@ -407,7 +464,7 @@ export default function LandingPage() {
           <span style={s.logoText}>WMS Pro</span>
         </div>
 
-        <div style={s.navLinks}>
+        <div style={s.navLinks} className="nav-links-desktop">
           {['Features', 'Workflow'].map(link => (
             <a key={link} style={s.navLink} className="nav-link-hover"
               href={`#${link.toLowerCase()}`}
@@ -420,7 +477,7 @@ export default function LandingPage() {
           ))}
         </div>
 
-        <div style={s.navActions}>
+        <div style={s.navActions} className="nav-actions-desktop">
           <button style={s.btnOutline} className="btn-outline-hover" onClick={() => navigate('/login')}>
             Login
           </button>
@@ -428,7 +485,39 @@ export default function LandingPage() {
             Get Started
           </button>
         </div>
+
+        {/* Hamburger */}
+        <button
+          className="hamburger"
+          onClick={() => setMobileMenuOpen(o => !o)}
+          style={{
+            background: 'none', border: 'none', color: '#f1f5f9',
+            cursor: 'pointer', padding: 8, display: 'none',
+          }}>
+          {mobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+        </button>
       </nav>
+
+      {/* Mobile menu */}
+      <div className={`mobile-menu${mobileMenuOpen ? ' open' : ''}`}>
+        {['Features', 'Workflow'].map(link => (
+          <button key={link} className="mobile-menu-link"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+            }}>
+            {link}
+          </button>
+        ))}
+        <div className="mobile-menu-actions">
+          <button style={{ ...s.btnOutline, flex: 1 }} onClick={() => { setMobileMenuOpen(false); navigate('/login'); }}>
+            Login
+          </button>
+          <button style={{ ...s.btnOrange, flex: 1 }} onClick={() => { setMobileMenuOpen(false); navigate('/register'); }}>
+            Get Started
+          </button>
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════════
           HERO
@@ -453,7 +542,7 @@ export default function LandingPage() {
 
         <div style={{ ...s.heroInner, position: 'relative', zIndex: 1 }}>
           {/* LEFT */}
-          <motion.div style={s.heroLeft} {...stagger(0)}>
+          <motion.div style={s.heroLeft} className="hero-left" {...stagger(0)}>
             <div style={s.pill}>
               <span style={s.greenDot} />
               v2.0 — Now with real-time sync
@@ -479,7 +568,7 @@ export default function LandingPage() {
               </button>
             </div>
 
-            <div style={s.metricRow}>
+            <div style={s.metricRow} className="metric-row">
               {[
                 { val: '99.8%', label: 'Pick Accuracy' },
                 { val: '< 2s',  label: 'Response Time' },
@@ -494,7 +583,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* RIGHT — Dashboard mockup */}
-          <motion.div style={s.heroRight}
+          <motion.div style={s.heroRight} className="hero-right"
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}>
@@ -522,8 +611,8 @@ export default function LandingPage() {
                 '✦ Real-time Sync', '✦ Multi-Warehouse', '✦ Role-Based Access',
                 '✦ Audit Trails', '✦ Barcode Scanning', '✦ Expiry Alerts',
                 '✦ GRN Management', '✦ Stock Transfers',
-              ].map(item => (
-                <span key={item} style={{
+              ].map((item, idx) => (
+                <span key={`${rep}-${idx}`} style={{
                   padding: '0 32px', fontSize: 13, fontWeight: 600,
                   color: '#94a3b8', whiteSpace: 'nowrap', letterSpacing: '0.04em',
                 }}>
@@ -540,13 +629,13 @@ export default function LandingPage() {
       ══════════════════════════════════════════ */}
       <section style={{
         padding: 'clamp(60px, 8vw, 100px) clamp(16px, 5vw, 80px)',
-        maxWidth: 1280, margin: '0 auto',
+        maxWidth: 1280, margin: '0 auto', width: '100%',
       }}>
         <motion.div {...fadeUp} style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: 24,
-        }}>
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: 32,
+        }} className="stats-grid">
           {[
             { num: '10,000', suffix: '+', label: 'Products Tracked' },
             { num: '500',    suffix: '+', label: 'Daily Orders' },
@@ -599,12 +688,11 @@ export default function LandingPage() {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gridTemplateRows: 'auto',
             gap: 16,
-          }}>
+          }} className="bento-grid">
 
             {/* Large card — spans 2 cols */}
-            <motion.div {...stagger(0)} className="feature-card" style={{
+            <motion.div {...stagger(0)} className="feature-card bento-span2" style={{
               gridColumn: 'span 2',
               background: '#0f0f0f',
               border: '1px solid #1a1a1a',
@@ -801,7 +889,7 @@ export default function LandingPage() {
           display: 'flex', alignItems: 'flex-start',
           gap: 0, position: 'relative', flexWrap: 'wrap',
           justifyContent: 'center',
-        }}>
+        }} className="workflow-inner">
           {[
             {
               num: '01', title: 'Receive GRN',
@@ -824,19 +912,19 @@ export default function LandingPage() {
               icon: <FiRepeat size={18} color="#f97316" />,
             },
           ].map((step, i, arr) => (
-            <div key={step.num} style={{
+            <div key={step.num} className="workflow-step" style={{
               display: 'flex', alignItems: 'flex-start', flex: '1 1 200px',
               minWidth: 180, maxWidth: 280,
             }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
                 {/* Circle */}
-                <div style={{
+                <div className="step-circle" style={{
                   width: 56, height: 56, borderRadius: '50%',
                   background: 'rgba(249,115,22,0.1)',
                   border: '2px solid rgba(249,115,22,0.4)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0, position: 'relative', zIndex: 1,
-                  marginBottom: 20,
+                  marginBottom: 20, transition: 'all 0.2s',
                 }}>
                   <span style={{
                     fontSize: 16, fontWeight: 800, color: '#f97316',
@@ -855,7 +943,7 @@ export default function LandingPage() {
               </div>
               {/* Connector line */}
               {i < arr.length - 1 && (
-                <div style={{
+                <div className="workflow-connector" style={{
                   width: 40, height: 2, flexShrink: 0,
                   borderTop: '2px dashed rgba(249,115,22,0.25)',
                   marginTop: 27, alignSelf: 'flex-start',
@@ -881,9 +969,9 @@ export default function LandingPage() {
             textAlign: 'center', position: 'relative',
           }}>
             <div style={{
-              fontSize: 80, lineHeight: 0.8, color: '#f97316',
-              fontFamily: 'Georgia, serif', marginBottom: 24,
-              opacity: 0.6,
+              fontSize: 80, lineHeight: 1, color: '#f97316',
+              fontFamily: 'Georgia, serif', marginBottom: 16,
+              opacity: 0.5, display: 'block',
             }}>
               "
             </div>
@@ -922,10 +1010,10 @@ export default function LandingPage() {
       {/* ══════════════════════════════════════════
           CTA — Diagonal clip-path
       ══════════════════════════════════════════ */}
-      <section style={{
-        padding: 'clamp(80px, 10vw, 120px) clamp(16px, 5vw, 80px)',
+      <section className="cta-clip" style={{
+        padding: 'clamp(100px, 12vw, 140px) clamp(16px, 5vw, 80px)',
         background: 'linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(251,191,36,0.06) 100%)',
-        clipPath: 'polygon(0 6%, 100% 0%, 100% 94%, 0% 100%)',
+        clipPath: 'polygon(0 8%, 100% 0%, 100% 92%, 0% 100%)',
         textAlign: 'center',
         position: 'relative',
       }}>
@@ -982,11 +1070,11 @@ export default function LandingPage() {
           <span style={s.logoText}>WMS Pro</span>
         </div>
 
-        <div style={{ fontSize: 12, color: '#334155', textAlign: 'center' }}>
+        <div style={{ fontSize: 12, color: '#64748b', textAlign: 'center' }}>
           © {new Date().getFullYear()} WMS Pro. All rights reserved.
         </div>
 
-        <div style={{ fontSize: 13, color: '#475569', fontWeight: 500 }}>
+        <div style={{ fontSize: 13, color: '#64748b', fontWeight: 500 }}>
           Built for modern warehouses.
         </div>
       </footer>
